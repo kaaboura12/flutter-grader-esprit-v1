@@ -2,9 +2,25 @@
 
 import { useState } from "react";
 import SplashScreen from "@/components/ui/SplashScreen";
+import Header from "@/components/layout/Header";
+import WelcomeSection from "@/components/ui/WelcomeSection";
+import AssignmentCard from "@/components/assignment/AssignmentCard";
+import GitRepositoryInput from "@/components/git/GitRepositoryInput";
+import FloatingTriangles from "@/components/ui/FloatingTriangles";
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
+
+  const assignmentRequirements = [
+    "Add todo",
+    "Delete todo",
+    "Mark todo as complete",
+  ];
+
+  const handleGitSubmit = (urls: string[]) => {
+    console.log("Submitted URLs:", urls);
+    // TODO: Implement submission logic
+  };
 
   return (
     <>
@@ -15,14 +31,21 @@ export default function Home() {
         />
       )}
       {!showSplash && (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-          <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-center px-8 text-center">
-            <h1 className="mb-4 text-4xl font-bold text-black dark:text-zinc-50">
-              Welcome to Flutter Grader
-            </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400">
-              ESPRIT University - Automated Grading System
-            </p>
+        <div className="relative min-h-screen bg-white">
+          <FloatingTriangles />
+          <Header />
+          <main className="relative z-10 mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+            <WelcomeSection />
+            <div className="space-y-6">
+              {/* Assignment Section */}
+              <AssignmentCard
+                title="Assignment"
+                requirements={assignmentRequirements}
+              />
+
+              {/* Git Repository Input Section */}
+              <GitRepositoryInput onSubmit={handleGitSubmit} />
+            </div>
           </main>
         </div>
       )}
