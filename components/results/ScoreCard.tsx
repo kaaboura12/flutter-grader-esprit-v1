@@ -19,19 +19,21 @@ export default function ScoreCard({ score, maxScore }: ScoreCardProps) {
 
   return (
     <div
-      className={`rounded-lg border-2 ${getScoreBgColor()} bg-gradient-to-br from-gray-50 to-red-50 shadow-sm p-8`}
+      className={`rounded-lg border-2 ${getScoreBgColor()} bg-gradient-to-br from-gray-50 to-red-50 shadow-sm p-6`}
     >
       <div className="text-center">
-        <p className="mb-2 text-sm font-medium text-gray-600">Final Score</p>
-        <div className="mb-4 flex items-baseline justify-center gap-2">
-          <span className={`text-6xl font-bold ${getScoreColor()}`}>
+        <p className="mb-1.5 text-xs font-medium text-gray-600 uppercase tracking-wide">
+          Final Score
+        </p>
+        <div className="mb-3 flex items-baseline justify-center gap-2">
+          <span className={`text-5xl font-bold ${getScoreColor()}`}>
             {score}
           </span>
-          <span className="text-2xl font-semibold text-gray-500">
+          <span className="text-xl font-semibold text-gray-500">
             / {maxScore}
           </span>
         </div>
-        <div className="mx-auto h-3 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
+        <div className="mx-auto h-2 w-full max-w-xs overflow-hidden rounded-full bg-gray-200">
           <div
             className={`h-full transition-all duration-500 ${
               percentage >= 80
@@ -43,7 +45,7 @@ export default function ScoreCard({ score, maxScore }: ScoreCardProps) {
             style={{ width: `${percentage}%` }}
           />
         </div>
-        <p className="mt-4 text-sm text-gray-600">
+        <p className="mt-2 text-xs text-gray-600">
           {percentage.toFixed(1)}% Complete
         </p>
       </div>

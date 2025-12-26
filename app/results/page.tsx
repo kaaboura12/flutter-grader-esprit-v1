@@ -40,11 +40,11 @@ function ResultsContent() {
       <div className="relative min-h-screen bg-white">
         <FloatingTriangles />
         <Header />
-        <main className="relative z-10 mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex min-h-[60vh] items-center justify-center">
+        <main className="relative z-10 mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex min-h-[50vh] items-center justify-center">
             <div className="text-center">
-              <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-600 border-r-transparent"></div>
-              <p className="text-gray-600">Loading results...</p>
+              <div className="mb-3 inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-red-600 border-r-transparent"></div>
+              <p className="text-sm text-gray-600">Loading results...</p>
             </div>
           </div>
         </main>
@@ -57,12 +57,12 @@ function ResultsContent() {
       <div className="relative min-h-screen bg-white">
         <FloatingTriangles />
         <Header />
-        <main className="relative z-10 mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex min-h-[60vh] items-center justify-center">
+        <main className="relative z-10 mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex min-h-[50vh] items-center justify-center">
             <div className="text-center">
-              <div className="mb-4 flex justify-center">
+              <div className="mb-3 flex justify-center">
                 <svg
-                  className="h-12 w-12 text-red-600"
+                  className="h-10 w-10 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -75,10 +75,10 @@ function ResultsContent() {
                   />
                 </svg>
               </div>
-              <h2 className="mb-2 text-xl font-semibold text-gray-900">
+              <h2 className="mb-2 text-lg font-semibold text-gray-900">
                 Error Loading Results
               </h2>
-              <p className="text-gray-600">{error || "No results found"}</p>
+              <p className="text-sm text-gray-600">{error || "No results found"}</p>
             </div>
           </div>
         </main>
@@ -90,31 +90,41 @@ function ResultsContent() {
     <div className="relative min-h-screen bg-white">
       <FloatingTriangles />
       <Header />
-      <main className="relative z-10 mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-8 text-center">
-          <h1 className="mb-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mb-4 text-center">
+          <h1 className="mb-1 text-2xl font-bold text-gray-900 sm:text-3xl">
             Evaluation Results
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm text-gray-600">
             Detailed breakdown of your assignment evaluation
           </p>
         </div>
 
-        <div className="space-y-6">
-          {/* Score Card */}
-          <ScoreCard score={result.totalScore} maxScore={result.maxScore} />
+        <div className="space-y-4">
+          {/* Score and Checks in Grid */}
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {/* Score Card - Takes 1 column */}
+            <div className="lg:col-span-1">
+              <ScoreCard
+                score={result.totalScore}
+                maxScore={result.maxScore}
+              />
+            </div>
 
-          {/* Checks List */}
-          <ChecksList checks={result.checks} />
+            {/* Checks List - Takes 2 columns */}
+            <div className="lg:col-span-2">
+              <ChecksList checks={result.checks} />
+            </div>
+          </div>
 
-          {/* Feedback Card */}
+          {/* Feedback Card - Full Width */}
           <FeedbackCard feedback={result.feedback} />
 
           {/* Back Button */}
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center pt-2">
             <button
               onClick={() => router.push("/")}
-              className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+              className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
             >
               <svg
                 className="mr-2 h-4 w-4"
@@ -145,11 +155,11 @@ export default function ResultsPage() {
         <div className="relative min-h-screen bg-white">
           <FloatingTriangles />
           <Header />
-          <main className="relative z-10 mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-            <div className="flex min-h-[60vh] items-center justify-center">
+          <main className="relative z-10 mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="flex min-h-[50vh] items-center justify-center">
               <div className="text-center">
-                <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-red-600 border-r-transparent"></div>
-                <p className="text-gray-600">Loading...</p>
+                <div className="mb-3 inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-red-600 border-r-transparent"></div>
+                <p className="text-sm text-gray-600">Loading...</p>
               </div>
             </div>
           </main>

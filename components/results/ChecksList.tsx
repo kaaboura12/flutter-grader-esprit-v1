@@ -7,26 +7,23 @@ interface ChecksListProps {
 export default function ChecksList({ checks }: ChecksListProps) {
   return (
     <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-gray-50 to-red-50 shadow-sm">
-      <div className="border-b border-gray-100 bg-gray-50 px-6 py-4">
-        <h2 className="text-xl font-semibold text-gray-900">
+      <div className="border-b border-gray-100 bg-gray-50 px-4 py-3">
+        <h2 className="text-lg font-semibold text-gray-900">
           Evaluation Checks
         </h2>
-        <p className="mt-1 text-sm text-gray-500">
-          Detailed breakdown of all checks performed
-        </p>
       </div>
-      <div className="px-6 py-6">
-        <div className="space-y-4">
+      <div className="p-4">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {checks.map((check, index) => (
             <div
               key={index}
-              className="flex items-start gap-4 rounded-lg border border-gray-200 bg-white p-4"
+              className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-3"
             >
               <div className="flex-shrink-0">
                 {check.passed ? (
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-100">
                     <svg
-                      className="h-5 w-5 text-green-600"
+                      className="h-4 w-4 text-green-600"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -38,9 +35,9 @@ export default function ChecksList({ checks }: ChecksListProps) {
                     </svg>
                   </div>
                 ) : (
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-red-100">
                     <svg
-                      className="h-5 w-5 text-red-600"
+                      className="h-4 w-4 text-red-600"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -53,18 +50,20 @@ export default function ChecksList({ checks }: ChecksListProps) {
                   </div>
                 )}
               </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-gray-900">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold text-gray-900 truncate">
                     {check.name}
                   </h3>
                   {check.score > 0 && (
-                    <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
-                      +{check.score} pts
+                    <span className="flex-shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
+                      +{check.score}
                     </span>
                   )}
                 </div>
-                <p className="mt-1 text-sm text-gray-600">{check.message}</p>
+                <p className="mt-0.5 text-xs text-gray-600 line-clamp-2">
+                  {check.message}
+                </p>
               </div>
             </div>
           ))}
