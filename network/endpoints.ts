@@ -18,5 +18,8 @@ export const API_ENDPOINTS = {
   // Repository endpoints
   REPOSITORIES: "/repositories",
   VALIDATE_REPOSITORY: "/repositories/validate",
+  
+  // Evaluation endpoints
+  EVALUATE: "/evaluate",
 } as const;
 

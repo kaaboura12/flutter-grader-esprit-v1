@@ -52,6 +52,34 @@ export interface GradeDetail {
   feedback?: string;
 }
 
+// Evaluation Result Types (from backend)
+export interface EvaluationResult {
+  totalScore: number;
+  maxScore: number;
+  checks: EvaluationCheck[];
+  feedback: string;
+  details: EvaluationDetails;
+}
+
+export interface EvaluationCheck {
+  name: string;
+  passed: boolean;
+  message: string;
+  score: number;
+}
+
+export interface EvaluationDetails {
+  cloneSuccessful: boolean;
+  filesValid: boolean;
+  pubGetSuccessful: boolean;
+  buildSuccessful: boolean;
+  testsPassed: boolean;
+  groqEvaluation?: {
+    score: number;
+    feedback: string;
+  };
+}
+
 // API Response Types
 export interface ApiResponse<T> {
   data: T;

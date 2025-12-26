@@ -1,15 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import SplashScreen from "@/components/ui/SplashScreen";
 import Header from "@/components/layout/Header";
 import WelcomeSection from "@/components/ui/WelcomeSection";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GitRepositoryInput from "@/components/git/GitRepositoryInput";
 import FloatingTriangles from "@/components/ui/FloatingTriangles";
+import { evaluationService } from "@/network";
+import type { ApiError } from "@/network";
 
 export default function Home() {
+  const router = useRouter();
   const [showSplash, setShowSplash] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const assignmentRequirements = [
     "Add todo",
@@ -17,9 +23,26 @@ export default function Home() {
     "Mark todo as complete",
   ];
 
-  const handleGitSubmit = (urls: string[]) => {
-    console.log("Submitted URLs:", urls);
-    // TODO: Implement submission logic
+  const handleGitSubmit = async (urls: string[]) => {
+    if (urls.length === 0) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Evaluate the first repository (you can extend this to handle multiple)
+      const result = await evaluationService.evaluate(urls[0]);
+
+      // Navigate to results page with the evaluation result
+      const resultData = encodeURIComponent(JSON.stringify(result));
+      router.push(`/results?result=${resultData}`);
+    } catch (err) {
+      const error = err as ApiError;
+      setSubmitError(
+        error.message || "Failed to evaluate repository. Please try again."
+      );
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -44,7 +67,11 @@ export default function Home() {
               />
 
               {/* Git Repository Input Section */}
-              <GitRepositoryInput onSubmit={handleGitSubmit} />
+              <GitRepositoryInput
+                onSubmit={handleGitSubmit}
+                isLoading={isSubmitting}
+                error={submitError}
+              />
             </div>
           </main>
         </div>
